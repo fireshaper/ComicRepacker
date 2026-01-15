@@ -56,6 +56,17 @@ async fn convert_book(app: AppHandle, path: String) -> Result<String, String> {
     Ok(res)
 }
 
+#[tauri::command]
+async fn delete_file(path: String) -> Result<(), String> {
+    let file_path = std::path::Path::new(&path);
+    if file_path.exists() {
+        std::fs::remove_file(file_path).map_err(|e| e.to_string())?;
+        Ok(())
+    } else {
+        Err("File not found".to_string())
+    }
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     let state = Arc::new(Mutex::new(AppState {
@@ -67,7 +78,7 @@ pub fn run() {
         .plugin(tauri_plugin_opener::init())
         .plugin(tauri_plugin_dialog::init())
         .manage(state)
-        .invoke_handler(tauri::generate_handler![greet, scan_directory, cancel_scan, convert_book])
+        .invoke_handler(tauri::generate_handler![greet, scan_directory, cancel_scan, convert_book, delete_file])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

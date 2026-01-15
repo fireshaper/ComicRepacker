@@ -58,10 +58,16 @@ xcode-select --install
 
 2.  **Setup 7-Zip:**
     Download the 7-Zip bundle for your OS.
-    -   **Linux/macOS:** Download the `7zz` binary.
-    -   **Windows:** Download the **7-Zip Extra** package (console version). You need `7z.exe` AND `7z.dll` because `7za.exe` does not support RAR.
+    -   **Linux/macOS:** 
+        1. Download the `7zip tar.gz` bundle.
+        2. Extract the bundle to a location of your choice.
 
-    Copy the binary to the `src-tauri/bin/` directory and **rename** it to match the target triple:
+    -   **Windows:**
+        1.  Download and install the **latest 64-bit 7-Zip installer** (`.exe`).
+        2.  Go to the install location (usually `C:\Program Files\7-Zip\`).
+        3.  Copy `7z.exe` AND `7z.dll`.
+
+    Copy the files(s) to the `src-tauri/bin/` directory and **rename** it to match the target triple:
     -   **Linux:** `7zz-x86_64-pc-linux-gnu`
     -   **macOS:** `7zz-x86_64-apple-darwin`
     -   **Windows:** `7zz-x86_64-pc-windows-msvc.exe` (Rename `7z.exe` to this)

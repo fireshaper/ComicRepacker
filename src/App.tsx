@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { invoke } from '@tauri-apps/api/core';
 import { listen } from '@tauri-apps/api/event';
-import { open } from '@tauri-apps/plugin-dialog';
+import { open, ask } from '@tauri-apps/plugin-dialog';
 import { FolderOpen, Play, Loader2, RefreshCw, XCircle } from 'lucide-react';
 import './styles.css';
 
@@ -89,8 +89,27 @@ function App() {
     setConvertingMap(prev => ({ ...prev, [path]: true }));
     try {
       await invoke('convert_book', { path });
-      // Update status locally
+
+      // Update status locally first
       setResults(prev => prev.map(r => r.path === path ? { ...r, status: "Converted" } : r));
+
+      // Ask to delete
+      const shouldDelete = await ask(`File converted successfully.\n\nDo you want to delete the original file?\n${path}`, {
+        title: 'Delete Original?',
+        kind: 'warning',
+        okLabel: 'Delete',
+        cancelLabel: 'Keep'
+      });
+
+      if (shouldDelete) {
+        try {
+          await invoke('delete_file', { path });
+          setResults(prev => prev.map(r => r.path === path ? { ...r, status: "Converted (Deleted)" } : r));
+        } catch (delErr) {
+          console.error("Failed to delete", delErr);
+          setResults(prev => prev.map(r => r.path === path ? { ...r, error: `Converted but failed to delete: ${delErr}` } : r));
+        }
+      }
     } catch (e) {
       console.error(e);
       setResults(prev => prev.map(r => r.path === path ? { ...r, status: "Error", error: String(e) } : r));

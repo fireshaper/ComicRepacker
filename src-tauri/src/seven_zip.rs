@@ -138,11 +138,6 @@ fn parse_7zz_output(output: &str) -> Result<ArchiveInfo, String> {
          }
     }
     
-    // Debugging: If file_type is empty, print the blocks to see what went wrong
-    if file_type.is_empty() {
-        println!("DEBUG: Type is empty. Dumping raw output:\n{}", output);
-    }
-
     println!("DEBUG: Parsed Type='{}', Solid={}", file_type, is_solid);
 
     // Detection logic
