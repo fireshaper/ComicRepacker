@@ -51,7 +51,7 @@ xcode-select --install
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/your-username/ComicRepacker.git
+    git clone https://github.com/fireshaper/ComicRepacker.git
     cd ComicRepacker
     ```
 
@@ -85,4 +85,3 @@ xcode-select --install
 ## License
 
 [MIT](LICENSE)
->>>>>>> ff24fc5 (Updating README)
