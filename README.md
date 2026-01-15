@@ -1,7 +1,5 @@
-# Tauri + React + Typescript
+# ComicRepacker
 
-This template should help get you started developing with Tauri, React and Typescript in Vite.
+Easily scan directories containing CBR files to find any that have been packed with RAR5
 
 ## Recommended IDE Setup
-
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
