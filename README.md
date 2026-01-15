@@ -55,18 +55,30 @@ xcode-select --install
     cd ComicRepacker
     ```
 
-2.  **Install project dependencies:**
+
+2.  **Setup 7-Zip:**
+    Download the 7-Zip bundle for your OS.
+    -   **Linux/macOS:** Download the `7zz` binary.
+    -   **Windows:** Download the **7-Zip Extra** package (console version) and locate `7za.exe`.
+
+    Copy the binary to the `src-tauri/bin/` directory and **rename** it to match the target triple:
+    -   **Linux:** `7zz-x86_64-pc-linux-gnu`
+    -   **macOS:** `7zz-x86_64-apple-darwin`
+    -   **Windows:** `7zz-x86_64-pc-windows-msvc.exe` (Rename `7za.exe` to this)
+
+3.  **Install project dependencies:**
+
     ```bash
     npm install
     ```
 
-3.  **Run in Development Mode:**
+4.  **Run in Development Mode:**
     This command will start the frontend dev server and the Tauri backend window.
     ```bash
     npm run tauri dev
     ```
 
-4.  **Build for Production:**
+5.  **Build for Production:**
     To create an optimized executable/installer for your current OS:
     ```bash
     npm run tauri build
