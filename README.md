@@ -1,10 +1,7 @@
 # ComicRepacker
 
-<<<<<<< HEAD
 Easily scan directories containing CBR files to find any that have been packed with RAR5
 
-## Recommended IDE Setup
-=======
 ComicRepacker is a cross-platform desktop application built with Tauri, React, and TypeScript designed to help comic, manga, and graphic novel enthusiasts manage their digital collections.
 
 ## Features
