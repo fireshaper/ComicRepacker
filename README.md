@@ -105,6 +105,10 @@ xcode-select --install
     -   **macOS:** `src-tauri/target/release/bundle/dmg/` (or .app)
     -   **Windows:** `src-tauri/target/release/bundle/msi/`
 
+## Releases
+
+Releases are available on the [releases page](https://github.com/fireshaper/ComicRepacker/releases).
+
 ## Technology Stack
 
 -   **Frontend**: React, TypeScript, Vite, Tailwind CSS (optional), LucideReact Icons
