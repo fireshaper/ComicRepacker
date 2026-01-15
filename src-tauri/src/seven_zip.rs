@@ -63,7 +63,13 @@ fn parse_7zz_output(output: &str) -> Result<ArchiveInfo, String> {
     let blocks: Vec<&str> = output.split("\n\n").collect();
     
     if blocks.is_empty() {
-        return Err("Empty output from 7zz".to_string());
+        // Fallback: if we don't have double newlines, try treating the whole thing as one block (rare but possible for single file)
+        if !output.trim().is_empty() {
+             // proceed with single block logic?
+             // Actually, let's just warn and rely on the robust loop below.
+        } else {
+            return Err("Empty output from 7zz".to_string());
+        }
     }
 
     let mut archive_props_found = false;
@@ -75,8 +81,14 @@ fn parse_7zz_output(output: &str) -> Result<ArchiveInfo, String> {
         let mut props = std::collections::HashMap::new();
         
         for line in &lines {
-            if let Some((key, value)) = line.split_once(" = ") {
-                props.insert(key.trim(), value.trim());
+            // More robust parsing: split by first '=', then trim. 
+            // 7z usually outputs "Key = Value", but "Key=Value" is possible in some environments/versions.
+            if let Some((key_raw, value_raw)) = line.split_once('=') {
+                let key = key_raw.trim();
+                let value = value_raw.trim();
+                if !key.is_empty() {
+                    props.insert(key, value);
+                }
             }
         }
 
