@@ -91,6 +91,15 @@ xcode-select --install
     ```bash
     npm run tauri build
     ```
+
+    > **Note for Linux (Fedora/newer distros):**
+    > If you encounter "failed to run linuxdeploy" or strip errors:
+    > 1. Ensure FUSE v2 is installed: `sudo dnf install fuse fuse-libs` (Fedora) or `sudo apt install libfuse2` (Ubuntu).
+    > 2. Build with `NO_STRIP=true` to avoid compatibility issues:
+    >    ```bash
+    >    NO_STRIP=true npm run tauri build
+    >    ```
+
     The output binaries will be located in:
     -   **Linux:** `src-tauri/target/release/bundle/deb/` (or AppImage)
     -   **macOS:** `src-tauri/target/release/bundle/dmg/` (or .app)
@@ -100,7 +109,7 @@ xcode-select --install
 
 -   **Frontend**: React, TypeScript, Vite, Tailwind CSS (optional), LucideReact Icons
 -   **Backend**: Rust (Tauri)
--   **Utilities**: `7-Zip` (bundled) for archive operations
+-   **Utilities**: `7-Zip` (not bundled) for archive operations
 
 ## License
 
